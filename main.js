@@ -1,57 +1,104 @@
+const clientList = [];
+const clientListListElement = document.getElementById('clientList');
+const nameInput = document.getElementById('nameInput');
+const phoneInput = document.getElementById('phoneInput');
+const addClientButton = document.getElementById('addClientButton');
 
-
-let tareas = JSON.parse(localStorage.getItem("tareas"))  || []
-
-const agregarTarea = (nombre,contenido) => {
-    const tarea = {
-        id:crypto.randomUUID(),
-        fecha: new Date(),
-        nombre,
-        contenido
+// Agregar contacto
+const addClient= () => {
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    
+    if (name && phone) {
+        const newClient = { name, phone };
+        clientList.push(newClient);
+        renderClients();
+        saveClients();
+        nameInput.value = '';
+        phoneInput.value = '';
+    } else {
+        alert('Por favor, ingrese tanto el nombre como el teléfono.');
     }
-    tareas.push(tarea)
-    localStorage.setItem("tareas",JSON.stringify(tareas))
-    return tarea
-}
+};
 
-const borrarTarea = (id) => {
-tareas = tareas.filter(tarea => tarea.id != id)
-localStorage.setItem("tareas",JSON.stringify(tareas))
-}
+// Función para renderizar la lista de contactos basado en documentación de un video en yt
+https://youtu.be/GHlXnT-3eiA?si=kDe67KZNBQS9jj7z
 
-const actualizarTarea = (id,nombreNuevoTarea,contenidoNuevoTarea) => {
 
-}
+const renderClients = () => {
+    clientListListElement.innerHTML = '';
+    clientList.forEach((client, index) => {
+        const li = document.createElement('li');
+        li.innerText = `${client.name} - ${client.phone}`;
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Eliminar';
+        deleteButton.onclick = () => deleteClient(index);
+        
+        const editButton = document.createElement('button');
+        editButton.innerText = 'Editar';
+        editButton.onclick = () => editClient(index);
+        
+        li.appendChild(editButton);
+        li.appendChild(deleteButton);
+        clientListListElement.appendChild(li);
+    });
+};
 
-const crearTarjetaTarea = (tarea) => {
-    const app = document.getElementById("app")
-    const element = document.createElement("div")
-    element.className = "tarjeta"
-    element.innerHTML = `
-                            <input type="text"  class="input" value="${tarea.nombre}">
-                            <textarea type="text"  class="input">${tarea.contenido}</textarea>
-                            <button class="btn btn-actualizar">Actualizar</button>
-                            <button class="btn btn-borrar">Borrar</button>
-    `
-    app.append(element)
-}
+// Eliminar contacto
+const deleteClient = (index) => {
+    clientList.splice(index, 1);
+    renderClients();
+    saveClients();
+};
 
-const principal = () =>{
+// Editar contacto
+const editClient = (index) => {
+    const client = clientList[index];
+    nameInput.value = client.name;
+    phoneInput.value = client.phone;
+    addClient
+    Button.innerText = 'Actualizar Cliente';
+    addClient
+    Button.onclick = () => updateClient(index);
+};
 
-    tareas.forEach(tarea => {
-        crearTarjetaTarea(tarea)
-    })
-    const btnAgregarTarea = document.getElementById("btnAgregarTarea")
-    btnAgregarTarea.addEventListener("click",()=>{
-        const nombreNuevaTarea = document.getElementById("nombreNuevaTarea")
-        const contenidoNuevaTarea = document.getElementById("contenidoNuevaTarea")
-        const tarea = agregarTarea(nombreNuevaTarea.value ,contenidoNuevaTarea.value)
-        crearTarjetaTarea(tarea)
-        nombreNuevaTarea.value = ""
-        contenidoNuevaTarea.value = ""
+// Actualizar contacto
+const updateClient = (index) => {
+    const updatedName = nameInput.value.trim();
+    const updatedPhone = phoneInput.value.trim();
 
-    })
+    if (updatedName && updatedPhone) {
+        clientList[index] = { name: updatedName, phone: updatedPhone };
+        renderClients();
+        saveClients();
+        nameInput.value = '';
+        phoneInput.value = '';
+        addClient
+        Button.innerText = 'Agregar Cliente';
+        addClient
+        Button.onclick = addClient
+        ;
+    } else {
+        alert('Por favor, ingrese tanto el nombre como el teléfono.');
+    }
+};
 
-}
+// Guardar contactos en localStorage
+const saveClients = () => {
+    localStorage.setItem('clients', JSON.stringify(clientList));
+};
 
-principal()
+// Cargar contactos desde localStorage
+const loadClients = () => {
+    const storedClients = localStorage.getItem('clients');
+    if (storedClients) {
+        clientList.push(...JSON.parse(storedClients));
+        renderClients();
+    }
+};
+
+// Evento s
+addClient
+addClientButton.addEventListener('click',addClient);
+window.addEventListener('load',loadClients);
