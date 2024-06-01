@@ -17,14 +17,11 @@ const addClient= () => {
         nameInput.value = '';
         phoneInput.value = '';
     } else {
-        alert('Por favor, ingrese tanto el nombre como el teléfono.');
+        alert('Por favor, ingrese tanto el nombre como el teléfono. Muchas gracias :p');
     }
 };
 
-// Función para renderizar la lista de contactos basado en documentación de un video en yt
-https://youtu.be/GHlXnT-3eiA?si=kDe67KZNBQS9jj7z
-
-
+// Función para renderizar la lista de contactos basado en documentación de un video en yt https://youtu.be/GHlXnT-3eiA?si=kDe67KZNBQS9jj7z
 const renderClients = () => {
     clientListListElement.innerHTML = '';
     clientList.forEach((client, index) => {
