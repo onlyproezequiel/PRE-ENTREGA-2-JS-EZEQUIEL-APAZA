@@ -1,18 +1,4 @@
-/*
-tipos de datos -> string o number o boolean o array o object o combinaciones
-variables -> let o const
-ciclos -> for o while o do while o for of / tambien podes usar forEach
-condicionales -> if o else if o switch / tambien podes usar metodos de busqueda y transformacion
-funciones -> function o arrow function 
 
-paradigma -> funcional(funciones y objetos literales) o orientado a objetos(clases y metodos)
-metodos de arrays -> push,splice,etc
-metodos de busqueda y transformacion -> find o/y filter o/y some o/y reduce o/y findIndex , etc
-manipulacion del dom -> getElementById / innerText / createElement / append / remove / value 
-localStorage 
-eventos -> click o/y  o/y change 
-
-*/
 
 let tareas = JSON.parse(localStorage.getItem("tareas"))  || []
 
