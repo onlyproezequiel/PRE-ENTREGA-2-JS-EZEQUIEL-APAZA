@@ -1,1 +1,1 @@
-No funciona en git pages. Creería que es porque el primer commit que hice el archivo index.html lo escribí con mayusculas, no sé si tendrá algo que ver, estoy tratando de solucionarlo para visualizarlo ya que le agregué algo de estilos
+¡¡¡Agregar!!! (INDEX.HTML) al final de la url
